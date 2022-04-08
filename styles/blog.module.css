@@ -1,0 +1,3 @@
+.blog p {
+    @apply text-gray-700 text-base md:text-lg tracking-normal leading-relaxed my-5 md:my-6;
+}

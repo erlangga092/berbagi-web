@@ -1,0 +1,31 @@
+---
+date: "2021-11-25"
+title: A complete guide to Flutter architecture
+description: Learn about Flutter's architecture to help when structuring an app, updating state, building widgets or screens, and maintaining
+prerequisites:
+    [
+        "Node.js installed on your computer",
+        "Basic knowledge working with Next.js and TypeScript",
+    ]
+stacks: ["Next.js", "TypeScript", "Git"]
+---
+
+This situation is most evident when using GraphQL with a CMS because CMSs are naturally opinionated and GraphQL might override their behavior. If we aren’t depending on a CMS and are instead building a site from scratch, then we should have full control of the site’s architecture and we may be willing to adapt it for GraphQL — and this conflict will not happen.
+
+In this article, we will explore the way in which GraphQL imposes its own preconditions during data fetching, why it happens, and what options we have to work around it. We’ll be using WordPress as our example CMS.
+
+This presents a problem: when a site admin adds an extra level to the menu via the user interface, this new level will not appear in the site if it is not also reflected in the GraphQL query. A developer must be engaged to modify the code — add the extra level to the GraphQL query, regenerate the theme’s .zip file, and reinstall it on the site. Only then will the new level show up in the query.
+
+Indeed, WordPress is used not just by developers but also by non-developers, people who may not appreciate that their site’s theme would need to be updated in order to update a menu. This runs counterintuitive and contrary to the idea of a CMS, so GraphQL would be imposing its own way of working on its host WordPress.
+
+A better solution would be to tell GraphQL to keep iterating down the sublevels until there are no more of them, i.e., until the field children is null. When working with PHP, for instance, a function can call itself recursively, until the input is the basic element:
+
+Another solution would be to create a custom directive, @recursive, which recursively applies a fragment to a field’s connections and its sub-connections all the way down until reaching the leaf nodes in the graph:
+
+This situation is most evident when using GraphQL with a CMS because CMSs are naturally opinionated and GraphQL might override their behavior. If we aren’t depending on a CMS and are instead building a site from scratch, then we should have full control of the site’s architecture and we may be willing to adapt it for GraphQL — and this conflict will not happen.
+
+In this article, we will explore the way in which GraphQL imposes its own preconditions during data fetching, why it happens, and what options we have to work around it. We’ll be using WordPress as our example CMS.
+
+This presents a problem: when a site admin adds an extra level to the menu via the user interface, this new level will not appear in the site if it is not also reflected in the GraphQL query. A developer must be engaged to modify the code — add the extra level to the GraphQL query, regenerate the theme’s .zip file, and reinstall it on the site. Only then will the new level show up in the query.
+
+Another solution would be to create a custom directive, @recursive, which recursively applies a fragment to a field’s connections and its sub-connections all the way down until reaching the leaf nodes in the graph:
